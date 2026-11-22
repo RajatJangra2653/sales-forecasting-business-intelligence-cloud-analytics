@@ -1,0 +1,12 @@
+{
+  "data_source": "SYNTHETIC DEMO (seed 42)",
+  "horizon_days": 28,
+  "first_date": "2022-01-01",
+  "last_date": "2025-12-31",
+  "selected_model": "Calendar ridge",
+  "holdout_metrics": {
+    "MAE": 1301.9566657220914,
+    "RMSE": 1633.3189362859982,
+    "WAPE (%)": 4.3649950659543855
+  }
+}
