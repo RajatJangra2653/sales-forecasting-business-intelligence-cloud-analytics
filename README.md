@@ -182,6 +182,7 @@ Official references for the included entry formats: [Codex AGENTS.md](https://le
 
 ## Troubleshooting and cleanup
 - Missing modules: activate the environment and reinstall `requirements.txt`.
+- PyArrow/NumPy import error: install the full current requirements file, which pins PyArrow 21.0.0 alongside NumPy 1.26.4. Unpinned newer PyArrow builds can require NumPy 2.
 - Not enough history: widen the selected dates or shorten the horizon.
 - Missing calendar days: investigate missing records before enabling zero fill.
 - GCS permission denied: verify bucket name, runtime identity and object-viewer grant.

@@ -8,7 +8,7 @@ Build a master's-level project on **Sales Forecasting and Business Intelligence 
 
 The working application, portable AI instructions, saved history and a Word case study have been created. No request to deploy the application or create cloud resources has been made.
 
-On 22 November the user requested GitHub publication and created the public repository `RajatJangra2653/sales-forecasting-business-intelligence-cloud-analytics`. Source upload is being prepared on `main`; verify the remote branch before treating publication as complete. Website/cloud deployment remains separate from this source upload.
+On 22 November the user requested GitHub publication and created the public repository `RajatJangra2653/sales-forecasting-business-intelligence-cloud-analytics`. The source was pushed successfully to `main`, and the remote head was verified against the local initial commit `658f7d33a70b0157c4e3fc946936e8d1cdd61e26`. The repository includes the application, README, case study, AI instructions, history, synthetic artifacts and test workflow. Website/cloud deployment remains separate from this source upload.
 
 ## Where things live
 
@@ -59,7 +59,7 @@ Keep ingestion/analytics separate from the Streamlit UI. Preserve temporal contr
 
 The initial build ran **7 tests successfully** using Python **3.9.6 on macOS**. Python **3.11** is recommended and configured for Docker/CI, but was not tested locally during that build. The suite covers validation, missing dates, reproducibility, seasonal recursion, forecast bounds, zero/short series, final-holdout isolation and dashboard/scenario interactions.
 
-On 22 November, the same seven tests passed again using the existing local environment before GitHub upload. No application source or saved model results were changed. Remote GitHub Actions results should be checked after the push.
+On 22 November, the same seven tests passed again using the existing local environment before GitHub upload. The first GitHub Actions run then exposed a fresh-install dependency conflict: newly resolved PyArrow required NumPy 2, while the project pins NumPy 1.26.4. Requirements now explicitly pin PyArrow 21.0.0, the working local version. The corrected remote workflow must pass before reporting CI success. Forecasting logic and saved results were unchanged.
 
 The 28-day synthetic CLI experiment selected **Calendar ridge**:
 
@@ -87,6 +87,8 @@ cd sales_cloud
 ```
 
 For a new machine, create an application-local environment using the README rather than relying on the outer `.venv/`. The initial build moved NumPy from 2.0.2 to **1.26.4** after numerical warnings; preserve the final requirements pin unless a tested change justifies updating it.
+
+For Git operations in the original checkout, `origin` points to the GitHub repository above and local `main` tracks `origin/main`. GitHub CLI was installed through Homebrew and authorized by the user as `RajatJangra2653`. Only this checkout's GitHub credential helper was configured to use `/opt/homebrew/bin/gh auth git-credential`; other repositories retain their existing Git credential configuration. Do not rely on that machine-specific helper path in a new clone.
 
 ## Open work and missing inputs
 

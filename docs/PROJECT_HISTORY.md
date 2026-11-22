@@ -139,6 +139,29 @@ The assistant selected `sales-forecasting-business-intelligence-cloud-analytics`
 - Verified ignore behavior for `.env`, `.env.local`, `.streamlit/secrets.toml`, `.venv/bin/python` and `.DS_Store` with `git check-ignore`.
 - Source commit preparation is complete; the push outcome and any remote CI result will be recorded after verification. Application code, requirements and saved model results were not changed.
 
+### Authentication before upload
+
+- Created local initial commit `658f7d3` with 28 project files, including the case study, instructions, synthetic artifacts and CI workflow.
+- The first HTTPS push was denied because the existing Git credential selected a different account. No matching stored credential or SSH identity was available for the repository owner.
+- A write through the connected GitHub integration was also denied with HTTP 403, despite the account metadata reporting repository push permission. No remote source commit was created by either failed attempt.
+- Installed the official GitHub CLI through Homebrew and started device sign-in for the repository owner, including workflow access required by the committed test workflow. The user must complete authorization. Device codes and credentials are deliberately excluded from this record.
+- Chose not to replace global Git authentication during sign-in, so other repositories can retain their existing account configuration.
+
+### Successful upload
+
+- The user completed GitHub CLI authorization. Verified that the active authenticated account was `RajatJangra2653`.
+- Configured a GitHub-specific credential helper only inside the local `sales_cloud/` checkout, keeping other repositories' Git account settings intact.
+- Ran `git push -u origin main` successfully. Verified that local HEAD and `git ls-remote origin refs/heads/main` both returned initial source commit `658f7d33a70b0157c4e3fc946936e8d1cdd61e26`.
+- Verified the remote top-level source tree, including `.github`, `app.py`, `analytics`, `docs`, `results` and the README. Public repository URL: https://github.com/RajatJangra2653/sales-forecasting-business-intelligence-cloud-analytics.
+- GitHub Actions started the `Analytics tests` workflow for that commit: https://github.com/RajatJangra2653/sales-forecasting-business-intelligence-cloud-analytics/actions/runs/44987535668. It was in progress at the first verification checkpoint.
+- This publishes project source; no website hosting, cloud deployment or paid resources were created.
+
+### Fresh install compatibility correction
+
+- The first GitHub Actions run completed with six analytics tests passing and the dashboard test failing. A newly resolved PyArrow dependency required NumPy 2 or newer, conflicting with this project's pinned NumPy 1.26.4. This did not occur in the original Python 3.9 environment, which already used PyArrow 21.0.0.
+- Added an explicit `pyarrow==21.0.0` requirement to preserve the locally tested combination in fresh Python 3.11 installs. Forecasting logic and saved experiment outputs were unchanged.
+- The corrected dependency pin and publication history are being pushed as a follow-up commit; its remote CI outcome will be checked before final delivery.
+
 ## Template for future entries
 
 Append a new dated section **above this template** after meaningful work:
