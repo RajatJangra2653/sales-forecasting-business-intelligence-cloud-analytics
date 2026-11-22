@@ -59,7 +59,7 @@ Keep ingestion/analytics separate from the Streamlit UI. Preserve temporal contr
 
 The initial build ran **7 tests successfully** using Python **3.9.6 on macOS**. Python **3.11** is recommended and configured for Docker/CI, but was not tested locally during that build. The suite covers validation, missing dates, reproducibility, seasonal recursion, forecast bounds, zero/short series, final-holdout isolation and dashboard/scenario interactions.
 
-On 22 November, the same seven tests passed again using the existing local environment before GitHub upload. The first GitHub Actions run then exposed a fresh-install dependency conflict: newly resolved PyArrow required NumPy 2, while the project pins NumPy 1.26.4. Requirements now explicitly pin PyArrow 21.0.0, the working local version. The corrected remote workflow must pass before reporting CI success. Forecasting logic and saved results were unchanged.
+On 22 November, the same seven tests passed again using the existing local environment before GitHub upload. The first GitHub Actions run then exposed a fresh-install dependency conflict: newly resolved PyArrow required NumPy 2, while the project pins NumPy 1.26.4. Requirements now explicitly pin PyArrow 21.0.0, the working local version. After that correction, all seven tests passed both locally and on GitHub Actions with Python 3.11.18. The successful remote run is https://github.com/RajatJangra2653/sales-forecasting-business-intelligence-cloud-analytics/actions/runs/44987679184 for source commit `de94667e6df1606e17c298561ee2eee01183a099`. Forecasting logic and saved results were unchanged.
 
 The 28-day synthetic CLI experiment selected **Calendar ridge**:
 

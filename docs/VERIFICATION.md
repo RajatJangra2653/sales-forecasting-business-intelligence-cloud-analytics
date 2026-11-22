@@ -15,3 +15,11 @@ Verified locally on 20 November 2026 using Python 3.9.6 on macOS with the pinned
 - Reran `python -m unittest discover -s tests -v` from the application directory using the existing outer virtual environment, `PYTHONPYCACHEPREFIX=/private/tmp/salesscope-pycache` and `LOKY_MAX_CPU_COUNT=2`.
 - Seven tests passed, zero failed, in 1.901 seconds. Only the expected Streamlit bare-mode ScriptRunContext warning was emitted.
 - Application source, dependencies and saved experiment outputs were unchanged. This local check does not verify cloud deployment or an actual GitHub Actions execution.
+
+## GitHub Actions validation on 22 November 2026
+
+- The first hosted test run found a fresh-install mismatch: the PyArrow version resolved on Python 3.11 required NumPy 2, while the project uses NumPy 1.26.4. Six analytics tests passed and the dashboard import failed.
+- Added the explicit `pyarrow==21.0.0` pin to preserve the existing working combination. The local suite passed again: seven tests, zero failures, in 1.703 seconds.
+- GitHub Actions then installed the corrected requirements on Ubuntu with Python 3.11.18 and passed all seven tests in 3.793 seconds.
+- Verified successful workflow: https://github.com/RajatJangra2653/sales-forecasting-business-intelligence-cloud-analytics/actions/runs/44987679184, source commit `de94667e6df1606e17c298561ee2eee01183a099`.
+- This verifies the application test suite on the recommended Python version. Docker build, live GCS access and hosted application deployment remain unverified.
